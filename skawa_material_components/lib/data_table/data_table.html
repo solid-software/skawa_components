@@ -12,11 +12,11 @@
             [ngClass]="c.getClasses('--header')"
             [class.sort-enabled]="c.sortModel != null && !c.sortModel.isSorted"
             [class.sort]="c.sortModel?.isSorted ?? false"
-            [class.desc]="c.sortModel?.isDescending ?? false">
-            <template [ngIf]="c.sortModel == null">{{c.header}}</template>
-            <template [ngIf]="c.sortModel != null">
-                <a (click)="triggerSort(c)">{{c.header}} </a>
-            </template>
+            [class.desc]="c.sortModel?.isDescending ?? false"
+            (click)="c.sortModel != null ? triggerSort(c) : null">
+            <div class="header-cell">
+                {{c.header}}
+            </div>
         </th>
     </tr>
     </thead>
@@ -35,7 +35,7 @@
                     [checked]="row.checked">
             </material-checkbox>
         </td>
-        <td *ngFor="let c of columns" [ngClass]="c.getClasses()">
+        <td *ngFor="let c of columns" [ngClass]="c.getClasses()" (click)="c.trigger(row)">
             <template [ngIf]="c.useColumnRenderer">
                 <dynamic-component
                         [componentFactory]="c.columnRenderer.factoryRenderer(row)"
@@ -43,9 +43,9 @@
                 </dynamic-component>
             </template>
             <template [ngIf]="!c.useColumnRenderer && c.useAccessorAsLink">
-                <a (click)="c.trigger(row); $event.preventDefault(); $event.stopPropagation()" class="has-action">
+                <div>
                     {{c.accessor(row)}}
-                </a>
+                </div>
             </template>
             <template [ngIf]="!c.useColumnRenderer && !c.useAccessorAsLink">{{c.accessor(row)}}</template>
         </td>

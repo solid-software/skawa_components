@@ -43,7 +43,7 @@
     &.non-selectable {
       th, td {
         &:first-of-type {
-          padding-left: 24px !important;
+          padding-left: 24px;
         }
       }
     }
@@ -55,7 +55,7 @@
         transition-property: background-color;
 
         &:hover, &.highlighted {
-          background-color: rgba(158, 158, 158, 0.2) !important;
+          background-color: rgba(158, 158, 158, 0.2);
         }
 
         &.selected {
@@ -99,21 +99,11 @@
         font-size: 12px;
 
         &.sort-enabled {
-          a {
+          .header-cell {
             cursor: pointer;
-
-            &:before {
-              font-family: 'Material Icons';
-              content: 'arrow_downwards';
-              opacity: 0;
-            }
 
             &:hover {
               font-weight: bold;
-
-              &:before {
-                opacity: 0.38;
-              }
             }
           }
         }
@@ -121,7 +111,7 @@
         &.sort {
           font-weight: bold;
 
-          a {
+          .header-cell {
             cursor: pointer;
 
             &:before {
@@ -132,7 +122,7 @@
           }
 
           &.desc {
-            a:before {
+            .header-cell:before {
               content: 'arrow_downwards';
             }
           }
@@ -143,7 +133,7 @@
   }
 
   .text-column, .text-column--header, .text-column--footer {
-    text-align: left !important;
+    text-align: left;
   }
 
   .numeric-column, .numeric-column--header, .numeric-column--footer {
